@@ -31,22 +31,25 @@
 </div>
 
 <div class="games">
-    <div class="game">
-        <div class="game-thumb-container">
-            <img 
-                src="https://i.stack.imgur.com/IpJ7Y.jpg"
+    <ng-container *ngFor="let game of games">
+        <div class="game">
+            <div class="game-thumb-container">
+                <img 
+                src="{{game.background_image}}"
                 alt=""
                 class="game-thumbnail">
+            </div>
         </div>
-    </div>
-    <div class="game-description">
-        <p class="game-name">Name</p>
-        <div class="game-platforms">
-            <img 
-                src="https://cdn.iconscout.com/icon/free/png-512/playstation-35-599378.png"
-                alt=""
-                class="game-platform"
-            >
+        <div class="game-description">
+            <p class="game-name">{{game.name}}</p>
+            <div class="game-platforms">
+                <img
+                    *ngFor="let platform of game.parent_platforms"
+                    src="assets/images/platforms/{{platform.platform.slug}}-brands.svg"
+                    title="{{platform.platform.slug}}"
+                    class="game-platform"
+                >
+            </div>
         </div>
-    </div>
+    </ng-container>
 </div>
