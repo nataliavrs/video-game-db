@@ -31,7 +31,8 @@ export class SearchBarComponent implements OnInit {
   }
 
   private registrationToken: string;
-
+  
+  // TO-DO: search only within the selected genre
   onSubmit(form: NgForm) {
     if (form.value.search) {
       this.router.navigate(['search', 'needtofix', form.value.search])

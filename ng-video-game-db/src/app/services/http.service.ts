@@ -52,5 +52,23 @@ export class HttpService {
     );
   }
 
+  getTrailer(id) {
+    let params = new HttpParams().set('id', id);
+    
+    return this.http.get<any>(`${env.BASE_URL}/games/${id}/movies`, 
+    {
+      params: params,
+    }
+    );
+  }
 
+  getScreenshots(id) {
+    let params = new HttpParams().set('id', id);
+    
+    return this.http.get<any>(`${env.BASE_URL}/games/${id}/screenshots`, 
+    {
+      params: params,
+    }
+    );
+  }
 }
