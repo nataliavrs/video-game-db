@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-bar',
@@ -24,16 +24,19 @@ import { Router } from '@angular/router';
 export class SearchBarComponent implements OnInit {
   // @Input() sortSelected;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    
   }
+
+  private registrationToken: string;
 
   onSubmit(form: NgForm) {
     if (form.value.search) {
-      this.router.navigate(['search', form.value.search])
+      this.router.navigate(['search', 'needtofix', form.value.search])
       form.reset();
-    } 
+    }
   }
 
 }

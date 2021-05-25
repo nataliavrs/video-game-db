@@ -12,7 +12,7 @@ import { HttpService } from 'src/app/services/http.service';
         <mat-select
           panelClass="sort-select"
           [(ngModel)]="sort"
-          (selectionChange)="searchGames(sort)"
+          (selectionChange)="searchGames(sort, 'puzzle')"
         >
           <mat-option value="-name">
           Name
@@ -53,6 +53,9 @@ import { HttpService } from 'src/app/services/http.service';
         </div>
         <div class="game-description">
           <p class="game-name">{{game.name}}</p>
+          <p class="game-name" *ngFor="let genre of game.genres">
+            {{genre.name}}
+          </p>
           <div class="game-platforms">
           <img
             *ngFor="let platform of game.parent_platforms"
@@ -74,26 +77,27 @@ export class HomeComponent implements OnInit {
   constructor(private httpService: HttpService, private router: Router, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
+    
     this.activatedRoute.params.subscribe((params: Params) => {
       if (params['searchQuery']) {
-        this.searchGames('metacrit', params['searchQuery']);
+        this.searchGames('metacrit', '', params['searchQuery']);
       } else {
-        this.searchGames('metacrit');
-      }
-    })
-  }
+          this.searchGames('metacrit', '');
+        }
+      })
+    }
   
-  searchGames(sort: string, search?: string): void {
+  searchGames(sort: string, genre: string, search?: string): void {
+    genre = this.activatedRoute.snapshot.params.genre;
     search = this.activatedRoute.snapshot.params.searchQuery;
-    // console.log(sort, search);
     this.httpService
-      .getGameList(sort, search)
+      .getGameList(sort, genre, search)
       .subscribe((gameList: APIResponse<Game>) => {
         this.games = gameList.results;
     })
   }
 
-  openGameDetails(id) {
+  openGameDetails(id: string): void {
     this.httpService
       .getGame(id)
       .subscribe((gameDetails: APIResponse<Game>) => {
