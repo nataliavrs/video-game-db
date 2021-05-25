@@ -94,7 +94,6 @@ export class HomeComponent implements OnInit {
   }
 
   openGameDetails(id) {
-    
     this.httpService
       .getGame(id)
       .subscribe((gameDetails: APIResponse<Game>) => {

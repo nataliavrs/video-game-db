@@ -41,5 +41,15 @@ export class HttpService {
     );
   }
 
+  getGenres(genre?: string) {
+    let params = new HttpParams().set('genre', genre);
+    
+    return this.http.get<APIResponse<Game>>(`${env.BASE_URL}/genres`, 
+    {
+      params: params,
+    }
+    );
+  }
+
 
 }

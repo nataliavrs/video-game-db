@@ -17,6 +17,8 @@ import { HomeComponent } from './components/home/home.component';
 import { HttpHeadersInterceptor } from './interceptors/http-headers.interceptor';
 import { HttpErrorsInterceptor } from './interceptors/http-errors.interceptor';
 import { GameDetailsComponent } from './components/game-details/game-details.component';
+import { HomeGenresComponent } from './components/home-genres/home-genres.component';
+
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { GameDetailsComponent } from './components/game-details/game-details.com
     SearchBarComponent,
     HomeComponent,
     GameDetailsComponent,
+    HomeGenresComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,7 @@ import { GameDetailsComponent } from './components/game-details/game-details.com
     MatTabsModule,
     MatIconModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   providers: [
     {

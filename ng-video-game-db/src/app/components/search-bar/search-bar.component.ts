@@ -22,7 +22,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./search-bar.component.scss']
 })
 export class SearchBarComponent implements OnInit {
-  @Input() sortSelected
+  // @Input() sortSelected;
 
   constructor(private router: Router) { }
 

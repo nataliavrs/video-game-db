@@ -7,9 +7,19 @@ import { HttpService } from 'src/app/services/http.service';
   selector: 'app-game-details',
   template: `
   <ng-container *ngIf="game">
+
     <h1>{{game.name}}</h1>
-    <img src="{{game.background_image}}" alt="">
+    <img height="300px" src="{{game.background_image}}" alt="">
+
+    <mat-tab-group mat-align-tabs="center">
+      <mat-tab label="About">{{game.description_raw}}</mat-tab>
+      <mat-tab label="Screenshoots">Content 2</mat-tab>
+      <mat-tab label="Trailers">Content 3</mat-tab>
+    </mat-tab-group>
+
   </ng-container>
+
+
   `,
   styleUrls: ['./game-details.component.scss']
 })
