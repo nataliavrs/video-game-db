@@ -1,11 +1,67 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { APIResponse, Game } from 'src/app/models';
 import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
+  template: `
+    <div class="filters">
+      <mat-form-field>
+        <mat-label>Sort</mat-label>
+        <mat-select
+          panelClass="sort-select"
+          [(ngModel)]="sort"
+          (selectionChange)="searchGames(sort)"
+        >
+          <mat-option value="-name">
+          Name
+          </mat-option>
+          <mat-option value="-released">
+          Released
+          </mat-option>
+          <mat-option value="-added">
+          Added
+          </mat-option>
+          <mat-option value="-created">
+          Created
+          </mat-option>
+          <mat-option value="-updated">
+          Updated
+          </mat-option>
+          <mat-option value="-rating">
+          Rating
+          </mat-option>
+          <mat-option value="-metacritic">
+          Metacritic
+          </mat-option>                                                                  
+        </mat-select>
+      </mat-form-field>
+    </div>
+    
+    <div class="games">
+      <ng-container *ngFor="let game of games">
+        <div class="game">
+          <div class="game-thumb-container">
+            <img 
+            src="{{game.background_image}}"
+            class="game-thumbnail">
+          </div>
+        </div>
+        <div class="game-description">
+          <p class="game-name">{{game.name}}</p>
+          <div class="game-platforms">
+          <img
+            *ngFor="let platform of game.parent_platforms"
+            src="assets/images/platforms/{{platform.platform.slug}}-brands.svg"
+            title="{{platform.platform.slug}}"
+            class="game-platform"
+          >
+          </div>
+      </div>
+      </ng-container>
+    </div>
+  `,
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
@@ -16,8 +72,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
-      if (params['game-search']) {
-        this.searchGames('metacrit', params['game-search']);
+      if (params['searchQuery']) {
+        this.searchGames('metacrit', params['searchQuery']);
       } else {
         this.searchGames('metacrit');
       }
@@ -25,11 +81,14 @@ export class HomeComponent implements OnInit {
   }
   
   searchGames(sort: string, search?: string): void {
+    search = this.activatedRoute.snapshot.params.searchQuery;
+    // console.log(sort, search);
     this.httpService
       .getGameList(sort, search)
       .subscribe((gameList: APIResponse<Game>) => {
         this.games = gameList.results;
-        console.log(gameList);
     })
+      
+     
   }
 }
