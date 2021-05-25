@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { APIResponse, Game } from 'src/app/models';
 import { HttpService } from 'src/app/services/http.service';
 
@@ -41,7 +41,10 @@ import { HttpService } from 'src/app/services/http.service';
     
     <div class="games">
       <ng-container *ngFor="let game of games">
-        <div class="game">
+        <div 
+          class="game"
+          (click)="openGameDetails(game.id)"
+        >
           <div class="game-thumb-container">
             <img 
             src="{{game.background_image}}"
@@ -68,7 +71,7 @@ export class HomeComponent implements OnInit {
   public sort: string;
   public games: Array<Game>
 
-  constructor(private httpService: HttpService, private activatedRoute: ActivatedRoute) {}
+  constructor(private httpService: HttpService, private router: Router, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
@@ -88,7 +91,15 @@ export class HomeComponent implements OnInit {
       .subscribe((gameList: APIResponse<Game>) => {
         this.games = gameList.results;
     })
-      
-     
+  }
+
+  openGameDetails(id) {
+    
+    this.httpService
+      .getGame(id)
+      .subscribe((gameDetails: APIResponse<Game>) => {
+        console.log(gameDetails);
+        this.router.navigate(['details', id])
+      })   
   }
 }

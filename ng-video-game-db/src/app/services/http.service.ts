@@ -27,4 +27,19 @@ export class HttpService {
     }
     );
   }
+
+  getGame(
+    // ordering: string,
+    id: string
+  ): Observable<APIResponse<Game>> {
+    let params = new HttpParams().set('id', id);
+
+    return this.http.get<APIResponse<Game>>(`${env.BASE_URL}/games/${id}`, 
+    {
+      params: params,
+    }
+    );
+  }
+
+
 }
