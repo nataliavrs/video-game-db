@@ -14,7 +14,7 @@ import { HttpService } from 'src/app/services/http.service';
     <mat-tab-group mat-align-tabs="center">
       <mat-tab label="About">{{game.description_raw}}</mat-tab>
       <mat-tab label="Screenshoots" >
-        <img *ngFor="let picture of screenshot" src="{{picture.image}}">
+        <img height="300px" *ngFor="let picture of screenshot" src="{{picture.image}}">
         
       </mat-tab>
       <mat-tab label="Trailers" *ngIf="trailer" (click)="showTrailer()">
@@ -69,17 +69,12 @@ export class GameDetailsComponent implements OnInit {
     this.httpService
       .getScreenshots(id)
       .subscribe((res) => {
-        // if (res.count > 0) {
-        //   this.screenshot = res.results.image;
-        //   console.log(this.screenshot);
-        // }
+        if (res.count > 0) {
           for (let index = 0; index < res.results.length; index++) {
             console.log(res.results[index].image);
             this.screenshot.push({"image": res.results[index].image});
           }       
-
-          console.log(this.screenshot);
-        
+        }
     })
   }
 }

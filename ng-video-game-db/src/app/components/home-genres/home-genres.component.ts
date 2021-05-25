@@ -12,6 +12,8 @@ import { HttpService } from 'src/app/services/http.service';
       [routerLink]="['home', genre.slug | lowercase]" 
     >
       {{genre.name}}
+
+      <img height="150px" src="{{genre.image_background}}" alt="">
     </div>
   `,
   styleUrls: ['./home-genres.component.scss']
