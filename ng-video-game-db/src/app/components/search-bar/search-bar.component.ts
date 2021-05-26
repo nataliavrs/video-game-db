@@ -17,6 +17,10 @@ import { ActivatedRoute, Router } from '@angular/router';
           >
           <button type="submit" class="search-button">Search</button>
       </form>
+
+      <div routerLink="/favorites" style="background-color: pink; padding: 20px">
+   favorites
+  </div>
     </div>
   `,
   styleUrls: ['./search-bar.component.scss']
