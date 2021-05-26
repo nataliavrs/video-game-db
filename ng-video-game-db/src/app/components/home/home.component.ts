@@ -59,7 +59,7 @@ import { FavoritesListComponent } from '../favorites-list/favorites-list.compone
           (click)="openGameDetails(game.id)"
         >
           <div class="game-thumb-container">
-            <a  (click)="addFavorite(game, $event)">favorita</a>
+            <a  (click)="addFavorite(game.id, $event)">favorita</a>
             <img 
             src="{{game.background_image}}"
             class="game-thumbnail">
@@ -90,10 +90,7 @@ export class HomeComponent implements OnInit {
   public favorites: any = [];
   error = 'false';
 
-  constructor(private httpService: HttpService, private router: Router, private activatedRoute: ActivatedRoute, private favoritesListService: FavoritesListService) {
-    console.log(this.favorites);
-    
-  }
+  constructor(private httpService: HttpService, private router: Router, private activatedRoute: ActivatedRoute, private favoritesListService: FavoritesListService) {}
 
   ngOnInit(): void {
     
@@ -126,10 +123,19 @@ export class HomeComponent implements OnInit {
   }
 
   // Add to favorites
-  addFavorite(game: any, event) {
+  addFavorite(id: any, event) {
     event.stopPropagation();
     // this.favoritesListService.favoritesArray.push(game)
-    this.favorites.push(game);
-    console.log(this.favorites);
+
+    if (!this.favorites.includes(id)) {
+      
+      this.favorites.push(id);
+    }
+    // console.log(this.favorites);
+    
+    localStorage.setItem("favorite", JSON.stringify(this.favorites));
+
+    // localStorage.clear();
+    
   }
 }
