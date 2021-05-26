@@ -1,11 +1,24 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { APIResponse, Game } from 'src/app/models';
+import { FavoritesListService } from 'src/app/services/favorites-list.service';
 import { HttpService } from 'src/app/services/http.service';
+import { FavoritesListComponent } from '../favorites-list/favorites-list.component';
 
 @Component({
   selector: 'app-home',
   template: `
+
+  <div routerLink="/favorites" style="background-color: pink; padding: 20px">
+   favorites
+  </div>
+
+  <!-- <app-favorites-list
+    [error]="error"
+  >
+  </app-favorites-list> -->
+   
+    
     <div class="filters">
       <mat-form-field>
         <mat-label>Sort</mat-label>
@@ -46,6 +59,7 @@ import { HttpService } from 'src/app/services/http.service';
           (click)="openGameDetails(game.id)"
         >
           <div class="game-thumb-container">
+            <a  (click)="addFavorite(game, $event)">favorita</a>
             <img 
             src="{{game.background_image}}"
             class="game-thumbnail">
@@ -72,9 +86,14 @@ import { HttpService } from 'src/app/services/http.service';
 })
 export class HomeComponent implements OnInit {
   public sort: string;
-  public games: Array<Game>
+  public games: Array<Game>;
+  public favorites: any = [];
+  error = 'false';
 
-  constructor(private httpService: HttpService, private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(private httpService: HttpService, private router: Router, private activatedRoute: ActivatedRoute, private favoritesListService: FavoritesListService) {
+    console.log(this.favorites);
+    
+  }
 
   ngOnInit(): void {
     
@@ -104,5 +123,13 @@ export class HomeComponent implements OnInit {
         console.log(gameDetails);
         this.router.navigate(['details', id])
       })   
+  }
+
+  // Add to favorites
+  addFavorite(game: any, event) {
+    event.stopPropagation();
+    // this.favoritesListService.favoritesArray.push(game)
+    this.favorites.push(game);
+    console.log(this.favorites);
   }
 }

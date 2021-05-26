@@ -6,10 +6,35 @@ import { HttpService } from 'src/app/services/http.service';
 @Component({
   selector: 'app-game-details',
   template: `
-  <ng-container *ngIf="game">
 
+  <ng-container *ngIf="game" >
     <h1>{{game.name}}</h1>
     <img height="300px" src="{{game.background_image}}">
+    
+    <div>
+      <h1>{{game.publishers[0].name}}</h1>
+    </div>
+    
+    <h3>released {{game.released}}</h3>
+    <h3>metacritic {{game.metacritic}}</h3>
+
+    <a href="{{game.website}}"></a>
+    
+    <h3>Rating {{game.rating}}</h3>
+    <h3>Rating count{{game.count}}</h3>
+
+    <ul>
+      <li *ngFor="let rating of game.ratings" >
+        <h5>{{rating.title}} | {{rating.count}}</h5>
+      </li>
+    </ul>
+
+    <ul>
+      <li *ngFor="let genre of game.genres" >
+        <h5>{{genre.name}}</h5>
+      </li>
+    </ul>
+
 
     <mat-tab-group mat-align-tabs="center">
       <mat-tab label="About">{{game.description_raw}}</mat-tab>
@@ -24,9 +49,7 @@ import { HttpService } from 'src/app/services/http.service';
           <source src="{{trailer}}"  type="video/ogg">
           Your browser does not support the video tag.
         </video>
-
-        <h1 *ngIf="!trailer">No trailers available for this game.</h1>
-
+  
       </mat-tab>
     </mat-tab-group>
 
@@ -46,6 +69,7 @@ export class GameDetailsComponent implements OnInit {
     this.httpService
       .getGame(search)
       .subscribe((gameDetails: APIResponse<Game>) => {
+        console.log(gameDetails);
         this.game = gameDetails;
     })
 
@@ -71,7 +95,7 @@ export class GameDetailsComponent implements OnInit {
       .subscribe((res) => {
         if (res.count > 0) {
           for (let index = 0; index < res.results.length; index++) {
-            console.log(res.results[index].image);
+            // console.log(res.results[index].image);
             this.screenshot.push({"image": res.results[index].image});
           }       
         }
