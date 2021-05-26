@@ -11,8 +11,10 @@ import { HttpService } from 'src/app/services/http.service';
         <div 
           class="game"
         >
-          <!-- (click)="openGameDetails(game.id)" -->
-          <div class="game-thumb-container">
+        <div 
+          class="game-thumb-container"
+          (click)="openGameDetails(game.id)"
+        >
             <img 
             src="{{game.background_image}}"
             class="game-thumbnail">
@@ -40,33 +42,32 @@ import { HttpService } from 'src/app/services/http.service';
 export class FavoritesListComponent implements OnInit {
   favorites = [];
   favoritesList = [];
-  
 
-  constructor(private httpService: HttpService, private router: Router) {
-    // console.log(localStorage.favorite);
-  }
+  constructor(private httpService: HttpService, private router: Router) {}
 
   ngOnInit(): void {
     var storedArray = localStorage.getItem("favorite");
     this.favorites = JSON.parse(storedArray);
 
     for (let index = 0; index < this.favorites.length; index++) {
-      this.openGameDetails(this.favorites[index])
+      this.GetItems(this.favorites[index])
     }
-
-    // console.log(this.favorites);
-    
   }
 
-  openGameDetails(id: any): void {
+  GetItems(id: string): void {
     this.httpService
       .getGame(id)
       .subscribe((gameDetails: APIResponse<Game>) => {
-        // console.log(gameDetails);
-        this.favoritesList.push(gameDetails)
-        
-        // console.log(this.favorites);
-        
+        this.favoritesList.push(gameDetails);
+      })   
+  }
+
+  openGameDetails(id: string): void {
+    this.httpService
+      .getGame(id)
+      .subscribe((gameDetails: APIResponse<Game>) => {
+        console.log(gameDetails);
+        this.router.navigate(['details', id])
       })   
   }
 }

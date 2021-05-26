@@ -1,9 +1,7 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { APIResponse, Game } from 'src/app/models';
-import { FavoritesListService } from 'src/app/services/favorites-list.service';
 import { HttpService } from 'src/app/services/http.service';
-import { FavoritesListComponent } from '../favorites-list/favorites-list.component';
 
 @Component({
   selector: 'app-home',
@@ -12,12 +10,6 @@ import { FavoritesListComponent } from '../favorites-list/favorites-list.compone
   <div routerLink="/favorites" style="background-color: pink; padding: 20px">
    favorites
   </div>
-
-  <!-- <app-favorites-list
-    [error]="error"
-  >
-  </app-favorites-list> -->
-   
     
     <div class="filters">
       <mat-form-field>
@@ -90,10 +82,9 @@ export class HomeComponent implements OnInit {
   public favorites: any = [];
   error = 'false';
 
-  constructor(private httpService: HttpService, private router: Router, private activatedRoute: ActivatedRoute, private favoritesListService: FavoritesListService) {}
+  constructor(private httpService: HttpService, private router: Router, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    
     this.activatedRoute.params.subscribe((params: Params) => {
       if (params['searchQuery']) {
         this.searchGames('metacrit', '', params['searchQuery']);
@@ -101,7 +92,7 @@ export class HomeComponent implements OnInit {
           this.searchGames('metacrit', '');
         }
       })
-    }
+  }
   
   searchGames(sort: string, genre: string, search?: string): void {
     genre = this.activatedRoute.snapshot.params.genre;
@@ -125,17 +116,10 @@ export class HomeComponent implements OnInit {
   // Add to favorites
   addFavorite(id: any, event) {
     event.stopPropagation();
-    // this.favoritesListService.favoritesArray.push(game)
-
     if (!this.favorites.includes(id)) {
-      
       this.favorites.push(id);
     }
-    // console.log(this.favorites);
-    
-    localStorage.setItem("favorite", JSON.stringify(this.favorites));
 
-    // localStorage.clear();
-    
+    localStorage.setItem("favorite", JSON.stringify(this.favorites));
   }
 }

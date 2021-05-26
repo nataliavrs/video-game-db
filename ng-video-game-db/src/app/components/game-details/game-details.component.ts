@@ -69,7 +69,7 @@ export class GameDetailsComponent implements OnInit {
     this.httpService
       .getGame(search)
       .subscribe((gameDetails: APIResponse<Game>) => {
-        console.log(gameDetails);
+        // console.log(gameDetails);
         this.game = gameDetails;
     })
 
