@@ -1,19 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { APIResponse, Game } from 'src/app/models';
 import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-home-genres',
   template: `
-    <div
-      style="background-color: red; margin: 5px;"
-      *ngFor="let genre of genres"
-      [routerLink]="['home', genre.slug | lowercase]" 
-    >
-      {{genre.name}}
+    <div class="main-container">
 
-      <img height="150px" src="{{genre.image_background}}" alt="">
+      <div
+        class="genres-container"
+        *ngFor="let genre of genres"
+        [routerLink]="['home', genre.slug | lowercase]" 
+      >
+
+      <img height="150px" src="{{genre.image_background}}">
+
+        <div class="genre-name">
+          {{genre.name}}
+        </div>
+
+        <div class="genre-initial">
+          {{genre.name | slice:0:1}}
+        </div>
+
+        <div class="genre-next">
+          <mat-icon class="icon" aria-hidden="false" aria-label="Example home icon">chevron_right</mat-icon>
+        </div>
+  
+      </div>
+
     </div>
   `,
   styleUrls: ['./home-genres.component.scss']

@@ -1,4 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+// Fonts
+// @import url('https://fonts.googleapis.com/css?family=Nunito');
+// Variables
+@import './app/shared/partials/variables';
+// Partials
+// @import 'partials/_mixins.scss';
+// @import 'partials/_main.scss';
+// @import 'partials/_header.scss';
+// @import './app/components/home-genres/home-genres.component.scss';
+
 * {
     margin: 0;
     padding: 0;
@@ -9,7 +19,6 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
     height: 100%;
     padding-top: 60px;
-    background-color: rgb(248, 247, 247);
+    background-color: #282828;
+    color: white;
 }
-
-

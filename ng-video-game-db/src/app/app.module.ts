@@ -20,7 +20,6 @@ import { GameDetailsComponent } from './components/game-details/game-details.com
 import { HomeGenresComponent } from './components/home-genres/home-genres.component';
 import { FavoritesListComponent } from './components/favorites-list/favorites-list.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
