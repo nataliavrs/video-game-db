@@ -6,6 +6,7 @@ import { HttpService } from 'src/app/services/http.service';
 @Component({
   selector: 'app-home',
   template: `
+  <h1 style="font-size: 5rem; margin: 30px; text-align: center">Titles</h1>
     <!-- <div class="filters">
       <mat-form-field>
         <mat-label>Sort</mat-label>
@@ -48,7 +49,7 @@ import { HttpService } from 'src/app/services/http.service';
         <!-- Favorite -->
         <div class="favorite-heart">
           <a (click)="addFavorite(game.id, $event)">
-            <mat-icon>favorite</mat-icon>
+            <!-- <mat-icon>favorite</mat-icon> -->
             <mat-icon>favorite_border</mat-icon>
           </a>
        </div>
@@ -64,21 +65,20 @@ import { HttpService } from 'src/app/services/http.service';
         <div class="game-description">
 
           <p class="game-name">{{game.name}}</p>
-
           
           <div class="game-platforms" *ngFor="let platform of game.parent_platforms | slice:0:4;">
             <span>{{platform.platform.name}}</span>
           </div>
           
+          
+        </div>
+        
         <span 
           class="game-rating"
           [style.background-color]="game.rating * 2 >= 8 ? '#66CC33' : game.rating * 2 >= 4 ? '#FFCC33' : '#FF0000'"
         >
           <span> {{game.rating === 0 ? 'Unavailable ' : game.rating * 2 }}</span>
         </span>
-
-        </div>
-
         <!-- Platforms -->
         <!-- <div class="game-platforms">
            <img

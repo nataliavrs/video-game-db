@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   template: `
     <div class="search-container">
       <form #form="ngForm" (ngSubmit)="onSubmit(form)">
-          <span class="logo" routerLink="/">Games</span>
+          <span class="logo" routerLink="/">GameStop 🕹️</span>
           <input 
               class="search-input"
               type="text"
@@ -18,9 +18,14 @@ import { ActivatedRoute, Router } from '@angular/router';
           <button type="submit" class="search-button">Search</button>
       </form>
 
-      <div routerLink="/favorites" style="background-color: pink; padding: 20px">
-   favorites
-  </div>
+      <div routerLink="/" style="padding: 20px">
+         About
+      </div>
+      
+      <div routerLink="/favorites" style="padding: 20px">
+         Favorites
+      </div>
+
     </div>
   `,
   styleUrls: ['./search-bar.component.scss']
