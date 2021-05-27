@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   template: `
     <div class="search-container">
       <form #form="ngForm" (ngSubmit)="onSubmit(form)">
-          <span class="logo" routerLink="/">GameStop 🕹️</span>
+          <span class="logo" routerLink="/">GameReview</span>
           <input 
               class="search-input"
               type="text"

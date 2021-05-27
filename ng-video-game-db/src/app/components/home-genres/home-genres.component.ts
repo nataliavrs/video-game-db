@@ -5,7 +5,7 @@ import { HttpService } from 'src/app/services/http.service';
 @Component({
   selector: 'app-home-genres',
   template: `
-  <h1 style="font-size: 5rem; margin: 30px; text-align: center">Genres</h1>
+  <h1 class="page-title">Genres</h1>
     <div class="main-container">
       <div
         class="genres-container"

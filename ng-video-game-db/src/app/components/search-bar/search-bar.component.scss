@@ -1,4 +1,6 @@
 @import './../../../styles.scss';
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); // pixel
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
 .search {
     &-container {
@@ -58,5 +60,7 @@
     margin-left: 10px;
     font-weight: bolder;
     font-size: 1.5rem;
-    // font-family: 
+    font-family: 'Press Start 2P', cursive; //PIXELATED
+    // font-family: 'Fredoka One', cursive;
+    vertical-align: middle;
 }

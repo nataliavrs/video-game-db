@@ -6,7 +6,7 @@ import { HttpService } from 'src/app/services/http.service';
 @Component({
   selector: 'app-home',
   template: `
-  <h1 style="font-size: 5rem; margin: 30px; text-align: center">Titles</h1>
+  <h1 class="page-title">Games</h1>
     <!-- <div class="filters">
       <mat-form-field>
         <mat-label>Sort</mat-label>
