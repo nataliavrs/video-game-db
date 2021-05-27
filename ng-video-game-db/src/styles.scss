@@ -18,7 +18,11 @@
 body { 
     font-family: Roboto, "Helvetica Neue", sans-serif;
     height: 100%;
+    width: 100%;
     padding-top: 60px;
     background-color: black;
     color: white;
+    // overflow-y: hidden;
+    // overflow-x: auto;
+    // white-space: nowrap;
 }

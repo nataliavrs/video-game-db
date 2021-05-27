@@ -62,20 +62,32 @@ import { HttpService } from 'src/app/services/http.service';
       </div>
         <!-- Description -->
         <div class="game-description">
+
           <p class="game-name">{{game.name}}</p>
-          <!-- <p class="game-name" *ngFor="let genre of game.genres">
-            {{genre.name}}
-          </p> -->
+
+          
+          <div class="game-platforms" *ngFor="let platform of game.parent_platforms | slice:0:4;">
+            <span>{{platform.platform.name}}</span>
+          </div>
+          
+        <span 
+          class="game-rating"
+          [style.background-color]="game.rating * 2 >= 8 ? '#66CC33' : game.rating * 2 >= 4 ? '#FFCC33' : '#FF0000'"
+        >
+          <span> {{game.rating === 0 ? 'Unavailable ' : game.rating * 2 }}</span>
+        </span>
+
         </div>
+
         <!-- Platforms -->
-        <div class="game-platforms">
-          <img
+        <!-- <div class="game-platforms">
+           <img
             *ngFor="let platform of game.parent_platforms"
             src="assets/images/platforms/{{platform.platform.slug}}-brands.svg"
             title="{{platform.platform.slug}}"
             class="game-platform"
-          >
-        </div>
+          > 
+         </div> -->
       </div>
     </div>
   `,
