@@ -1,0 +1,55 @@
+@import './../../../styles.scss';
+
+.main-container {
+    width: 100%;
+    position: relative;
+}
+
+.img-container {
+    position: relative;
+    width:100%;
+    height: 400px;
+    text-align: center;
+    img {
+        object-fit: cover;
+        overflow: hidden;
+        width:100%;
+        height: 100%;
+    }
+}
+
+.info-box {
+    position: absolute;
+    left: 50px;
+    bottom: -30px;
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.514);
+    height: 200px;
+    .game-name {
+        font-size: 4rem;
+    }
+}
+
+.mat-tab-group {
+    width: 90%;
+    margin: auto;
+    color: white;
+    padding: 14px;
+    font-size: 1.1rem;
+    line-height: 40px;
+    margin-top: 30px;
+}
+
+::ng-deep {
+    .mat-tab-group {
+        background-color: #1F1F1F;
+    }
+
+    .screen-container {
+        flex-direction: column;
+        .screenshot {
+            padding: 5px;
+            width: 50%;
+        }
+    }
+}

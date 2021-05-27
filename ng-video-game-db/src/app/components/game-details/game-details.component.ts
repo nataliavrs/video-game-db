@@ -6,54 +6,60 @@ import { HttpService } from 'src/app/services/http.service';
 @Component({
   selector: 'app-game-details',
   template: `
-
-  <ng-container *ngIf="game" >
-    <h1>{{game.name}}</h1>
-    <img height="300px" src="{{game.background_image}}">
+  <div class="main-container" *ngIf="game">
     
-    <div>
-      <h1>{{game.publishers[0].name}}</h1>
+    <div class="img-container">
+      <img src="{{game.background_image}}">
+      <div class="info-box">
+        <h1 class="game-name">{{game.name}}</h1>
+        <h1>{{game.publishers[0].name | uppercase}}</h1>
+        <h2>Released {{game.released | date:'longDate'}}</h2>
+      </div>
     </div>
     
-    <h3>released {{game.released}}</h3>
+    <!--
+    <div>
+    </div>
+    
     <h3>metacritic {{game.metacritic}}</h3>
 
-    <a href="{{game.website}}"></a>
     
     <h3>Rating {{game.rating}}</h3>
     <h3>Rating count{{game.count}}</h3>
-
+    
     <ul>
       <li *ngFor="let rating of game.ratings" >
         <h5>{{rating.title}} | {{rating.count}}</h5>
       </li>
     </ul>
-
+    
     <ul>
       <li *ngFor="let genre of game.genres" >
         <h5>{{genre.name}}</h5>
       </li>
     </ul>
-
-
+    -->
     <mat-tab-group mat-align-tabs="center">
-      <mat-tab label="About">{{game.description_raw}}</mat-tab>
-      <mat-tab label="Screenshoots" >
-        <img height="300px" *ngFor="let picture of screenshot" src="{{picture.image}}">
-        
+      <mat-tab label="About">
+        {{game.description_raw}}
+        <br>
+        <a href="{{game.website}}">{{game.website}}</a>
+      </mat-tab>
+      <mat-tab label="Screenshoots">
+        <div class="screen-container">
+          <img class="screenshot" *ngFor="let picture of screenshot" src="{{picture.image}}">
+        </div>
       </mat-tab>
       <mat-tab label="Trailers" *ngIf="trailer" (click)="showTrailer()">
-        
         <video width="320" height="240" controls *ngIf="trailer">
           <source src="{{trailer}}" type="video/mp4">
           <source src="{{trailer}}"  type="video/ogg">
           Your browser does not support the video tag.
         </video>
-  
       </mat-tab>
-    </mat-tab-group>
+    </mat-tab-group> 
 
-  </ng-container>
+  </div>
   `,
   styleUrls: ['./game-details.component.scss']
 })
