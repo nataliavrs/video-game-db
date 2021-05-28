@@ -6,38 +6,50 @@ import { HttpService } from 'src/app/services/http.service';
 @Component({
   selector: 'app-favorites-list',
   template: `
-    <div class="games" >
-      <ng-container  *ngFor="let game of favoritesList">
-        <div 
-          class="game"
+  <h1 class="page-title">Your Favorites</h1>
+  <div class="main-container" *ngIf="favoritesList.length > 0">
+   <div 
+        class="game"
+        (click)="openGameDetails(game.id)"
+        *ngFor="let game of favoritesList"
         >
-        <div 
-          class="game-thumb-container"
-          (click)="openGameDetails(game.id)"
-        >
-            <img 
+        <!-- Favorite -->
+        <div class="favorite-heart">
+          <a (click)="addFavorite(game.id, $event)">
+            <mat-icon>favorite</mat-icon>
+          </a>
+       </div>
+       <!-- Image -->
+       <div class="img-container">
+        <div class="game-thumb-container">
+          <img 
             src="{{game.background_image}}"
-            class="game-thumbnail">
-          </div>
-          </div>
-        <div class="game-description">
-          <p class="game-name">{{game.name}}</p>
-          <p class="game-name" *ngFor="let genre of game.genres">
-            {{genre.name}}
-          </p>
-          <div class="game-platforms">
-          <img
-            *ngFor="let platform of game.parent_platforms"
-            src="assets/images/platforms/{{platform.platform.slug}}-brands.svg"
-            title="{{platform.platform.slug}}"
-            class="game-platform"
+            class="game-thumbnail"
           >
-          </div>
         </div>
-    </ng-container>
-  </div>
+      </div>
+        <!-- Description -->
+        <div class="game-description">
+
+          <p class="game-name">{{game.name}}</p>
+          
+          <div class="game-platforms" *ngFor="let platform of game.parent_platforms | slice:0:4;">
+            <span>{{platform.platform.name}}</span>
+          </div>
+          
+          
+        </div>
+        
+        <span 
+          class="game-rating"
+          [style.background-color]="game.rating * 2 >= 8 ? '#66CC33' : game.rating * 2 >= 4 ? '#FFCC33' : '#FF0000'"
+        >
+          <span> {{game.rating === 0 ? 'Unavailable ' : game.rating * 2 }}</span>
+        </span>
+
+    </div>
   `,
-  styleUrls: ['../home/home.component.scss']
+  styleUrls: ['./favorites-list.component.scss']
 })
 export class FavoritesListComponent implements OnInit {
   favorites = [];

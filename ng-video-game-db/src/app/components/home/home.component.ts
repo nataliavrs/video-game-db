@@ -80,15 +80,6 @@ import { HttpService } from 'src/app/services/http.service';
         >
           <span> {{game.rating === 0 ? 'Unavailable ' : game.rating * 2 }}</span>
         </span>
-        <!-- Platforms -->
-        <!-- <div class="game-platforms">
-           <img
-            *ngFor="let platform of game.parent_platforms"
-            src="assets/images/platforms/{{platform.platform.slug}}-brands.svg"
-            title="{{platform.platform.slug}}"
-            class="game-platform"
-          > 
-         </div> -->
       </div>
     </div>
   `,

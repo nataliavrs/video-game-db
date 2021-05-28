@@ -72,3 +72,40 @@
 .website {
     padding: 0 5px;
 }
+
+.gauge-container {
+    position: relative;
+    position: absolute;
+    top: 240px;
+    right: 50px;
+    .game-gauge {
+        ::ng-deep mwl-gauge {
+            width: 220px;
+            display: block;
+            .dial {
+                stroke-width: 10;
+            }
+            .value {
+                stroke-dasharray: none;
+                stroke-width: 13;
+            }
+            
+            .value-text {
+                fill: white;
+                font-weight: bolder;
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            position: absolute;
+            bottom: 75px;
+            font-size: 1.3rem;
+            left: 65px;
+            font-weight: bolder;
+        }
+    }
+}
+
+

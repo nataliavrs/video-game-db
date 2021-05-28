@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { APIResponse, Game } from 'src/app/models';
 import { HttpService } from 'src/app/services/http.service';
 
@@ -14,8 +14,26 @@ import { HttpService } from 'src/app/services/http.service';
         <h1 class="game-name">{{game.name}}</h1>
         <h1>{{game.publishers[0].name | uppercase}}</h1>
         <h2>Released {{game.released | date:'longDate'}}</h2>
+        </div>
       </div>
-    </div>
+
+       <!-- Game gauge -->
+       <div class="gauge-container" *ngIf="game.metacritic_url">
+        <div class="game-gauge">
+          <mwl-gauge
+            [max]="100"
+            [dialStartAngle]="180"
+            [dialEndAngle]="0"
+            [value]="gameRating"
+            [animated]="true"
+            [color]="getColor"
+            >
+          </mwl-gauge>
+          <a href="{{game.metacritic_url}}" target="_blank">
+            Metacritic
+          </a>
+        </div>
+      </div>
     
     <mat-tab-group mat-align-tabs="center">
       <mat-tab label="About">
@@ -24,21 +42,9 @@ import { HttpService } from 'src/app/services/http.service';
         <a href="{{game.website}}" target="_blank">
           <button class="website" mat-raised-button>Game site</button>
         </a>
-        <a href="{{game.metacritic_url}}" target="_blank">
-          <button class="website" mat-raised-button>Metacritic</button>
+        <a href="{{game.reddit_url}}" target="_blank">
+          <button class="website" mat-raised-button>Reddit</button>
         </a>
-        <a href="{{game.metacritic_url}}" target="_blank">
-          <button class="website" mat-raised-button>Metacritic</button>
-        </a>
-
-    <!-- <h3>metacritic {{game.metacritic}}</h3>
-    <h3>Rating {{game.rating}}</h3>
-    <h3>Rating count{{game.count}}</h3>
-    <ul>
-      <li *ngFor="let rating of game.ratings" >
-        <h5>{{rating.title}} | {{rating.count}}</h5>
-      </li>
-    </ul> -->
       <h2>Genres</h2>
       <span *ngFor="let genre of game.genres" >
         {{genre.name}}
@@ -47,9 +53,9 @@ import { HttpService } from 'src/app/services/http.service';
       <span>
         {{game.developers[0].name}}
       </span>
-      <br>
-      <h2>Language</h2>
+      <h2>Age</h2>
       <span>
+        {{game.esrb_rating.name}}
       </span>
       <br>
       </mat-tab>
@@ -59,7 +65,7 @@ import { HttpService } from 'src/app/services/http.service';
         </div>
       </mat-tab>
       <mat-tab label="Trailers" *ngIf="trailer" (click)="showTrailer()">
-        <video width="320" height="240" controls *ngIf="trailer">
+        <video width="320" height="240" controls>
           <source src="{{trailer}}" type="video/mp4">
           <source src="{{trailer}}"  type="video/ogg">
           Your browser does not support the video tag.
@@ -74,6 +80,8 @@ export class GameDetailsComponent implements OnInit {
   game: any;
   trailer: any;
   screenshot: any = [];
+  // Gauge metacritic
+  gameRating = 0;
 
   constructor(private httpService: HttpService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -84,6 +92,9 @@ export class GameDetailsComponent implements OnInit {
       .subscribe((gameDetails: APIResponse<Game>) => {
         // console.log(gameDetails);
         this.game = gameDetails;
+        setTimeout(()=> { 
+          this.gameRating = this.game.metacritic;
+        }, 800);
     })
 
     this.showTrailer();
@@ -113,5 +124,15 @@ export class GameDetailsComponent implements OnInit {
           }       
         }
     })
+  }
+
+  getColor(value: number): string {
+    if (value > 75) {
+      return "#66CC33"
+    } else if (value > 50 && value < 70) {
+      return "#FFCC33"
+    } else {
+      return "#FF0000"
+    }
   }
 }
