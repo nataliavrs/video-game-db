@@ -7,7 +7,7 @@ import { HttpService } from 'src/app/services/http.service';
   selector: 'app-home',
   template: `
   <h1 class="page-title">Games</h1>
-    <!-- <div class="filters">
+    <div class="filters">
       <mat-form-field>
         <mat-label>Sort</mat-label>
         <mat-select
@@ -38,7 +38,7 @@ import { HttpService } from 'src/app/services/http.service';
           </mat-option>                                                                  
         </mat-select>
       </mat-form-field>
-    </div> -->
+    </div>
 
     <div class="main-container">
       <div 
@@ -60,13 +60,8 @@ import { HttpService } from 'src/app/services/http.service';
             src="{{game.background_image}}"
             class="game-thumbnail"
           >
-          <img 
-            src="{{game.background_image_additional}}"
-            class="game-thumbnail"
-          >
         </div>
       </div>
-      background_image_additional
         <!-- Description -->
         <div class="game-description">
 

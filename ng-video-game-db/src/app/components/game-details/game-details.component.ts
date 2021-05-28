@@ -6,8 +6,6 @@ import { HttpService } from 'src/app/services/http.service';
 @Component({
   selector: 'app-game-details',
   template: `
-  <pre>{{game| json}}</pre>
-  
   <div class="main-container" *ngIf="game">
     
     <div class="img-container">
