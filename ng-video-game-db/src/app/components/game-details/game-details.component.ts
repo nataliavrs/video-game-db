@@ -6,6 +6,8 @@ import { HttpService } from 'src/app/services/http.service';
 @Component({
   selector: 'app-game-details',
   template: `
+  <pre>{{game| json}}</pre>
+  
   <div class="main-container" *ngIf="game">
     
     <div class="img-container">
@@ -17,33 +19,41 @@ import { HttpService } from 'src/app/services/http.service';
       </div>
     </div>
     
-    <!--
-    <div>
-    </div>
-    
-    <h3>metacritic {{game.metacritic}}</h3>
-
-    
-    <h3>Rating {{game.rating}}</h3>
-    <h3>Rating count{{game.count}}</h3>
-    
-    <ul>
-      <li *ngFor="let rating of game.ratings" >
-        <h5>{{rating.title}} | {{rating.count}}</h5>
-      </li>
-    </ul>
-    
-    <ul>
-      <li *ngFor="let genre of game.genres" >
-        <h5>{{genre.name}}</h5>
-      </li>
-    </ul>
-    -->
     <mat-tab-group mat-align-tabs="center">
       <mat-tab label="About">
         {{game.description_raw}}
         <br>
-        <a href="{{game.website}}">{{game.website}}</a>
+        <a href="{{game.website}}" target="_blank">
+          <button class="website" mat-raised-button>Game site</button>
+        </a>
+        <a href="{{game.metacritic_url}}" target="_blank">
+          <button class="website" mat-raised-button>Metacritic</button>
+        </a>
+        <a href="{{game.metacritic_url}}" target="_blank">
+          <button class="website" mat-raised-button>Metacritic</button>
+        </a>
+
+    <!-- <h3>metacritic {{game.metacritic}}</h3>
+    <h3>Rating {{game.rating}}</h3>
+    <h3>Rating count{{game.count}}</h3>
+    <ul>
+      <li *ngFor="let rating of game.ratings" >
+        <h5>{{rating.title}} | {{rating.count}}</h5>
+      </li>
+    </ul> -->
+      <h2>Genres</h2>
+      <span *ngFor="let genre of game.genres" >
+        {{genre.name}}
+      </span>
+      <h2>Developer</h2>
+      <span>
+        {{game.developers[0].name}}
+      </span>
+      <br>
+      <h2>Language</h2>
+      <span>
+      </span>
+      <br>
       </mat-tab>
       <mat-tab label="Screenshoots">
         <div class="screen-container">
@@ -58,7 +68,6 @@ import { HttpService } from 'src/app/services/http.service';
         </video>
       </mat-tab>
     </mat-tab-group> 
-
   </div>
   `,
   styleUrls: ['./game-details.component.scss']

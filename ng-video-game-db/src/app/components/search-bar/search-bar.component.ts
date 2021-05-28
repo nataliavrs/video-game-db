@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-search-bar',
   template: `
@@ -15,7 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
               ngModel
               placeholder="Search 500,000+ games"
           >
-          <button type="submit" class="search-button">Search</button>
+          <button type="submit" mat-raised-button>Search</button>
       </form>
 
       <div routerLink="/" style="padding: 20px">

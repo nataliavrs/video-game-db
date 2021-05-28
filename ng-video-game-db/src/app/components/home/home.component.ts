@@ -57,10 +57,16 @@ import { HttpService } from 'src/app/services/http.service';
        <div class="img-container">
         <div class="game-thumb-container">
           <img 
-          src="{{game.background_image}}"
-          class="game-thumbnail">
+            src="{{game.background_image}}"
+            class="game-thumbnail"
+          >
+          <img 
+            src="{{game.background_image_additional}}"
+            class="game-thumbnail"
+          >
         </div>
       </div>
+      background_image_additional
         <!-- Description -->
         <div class="game-description">
 
